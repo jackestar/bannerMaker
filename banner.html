@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Little Banner Generator</title>
+    <link rel="stylesheet" href="stylesB.css">
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1>Generador De Icon Banner</h1>
+            <p>v0.0 generated with <i>FontAwesome</i></p>
+        </div>
+        <div class="path"></div>
+    </header>
+    <article>
+        <section class="form">
+            <div class="inp">
+                <input type="search" placeholder="Icono a buscar" name="icon" search>
+                <input type="color" name="color" color value="#f2a3bb">
+            </div>
+        </section>
+        <section class="resul">
+
+        </section>
+        <template search-result>
+            <div class="elem" onclick="elementFocus(this)">
+                <div class="img"></div>
+                <p></p>
+            </div>
+        </template>
+    </article>
+    <script src="search.js"></script>
+</body>
+</html>

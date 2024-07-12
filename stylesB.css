@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --A:#000807;
+  --B:#a2a3bb;
+  --C:#9395d3;
+  --D:#b3b7ee;
+  --E:#fbf9ff;
+  --a:#500807;
+  --b:#f2a3bb;
+  --c:#e395d3;
+  --d:#d3b7ee;
+  --e:#fbf9ff;
+
+}
+
+body {
+  background-color: var(--E);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+
+header {
+  z-index: 1000;
+}
+
+header>div {
+ width: 100vw;
+ background-color: var(--B);
+ text-align: center;
+}
+header>div.path {
+  clip-path: polygon(100% 0%, 0% 0% , 0.00% 26.00%, 1.00% 24.13%, 2.00% 19.11%, 3.00% 12.50%, 4.00% 6.35%, 5.00% 2.59%, 6.00% 2.38%, 7.00% 5.79%, 8.00% 11.75%, 9.00% 18.42%, 10.00% 23.71%, 11.00% 25.98%, 12.00% 24.52%, 13.00% 19.78%, 14.00% 13.25%, 15.00% 6.95%, 16.00% 2.84%, 17.00% 2.21%, 18.00% 5.25%, 19.00% 11.02%, 20.00% 17.71%, 21.00% 23.25%, 22.00% 25.91%, 23.00% 24.86%, 24.00% 20.43%, 25.00% 14.00%, 26.00% 7.57%, 27.00% 3.14%, 28.00% 2.09%, 29.00% 4.75%, 30.00% 10.29%, 31.00% 16.98%, 32.00% 22.75%, 33.00% 25.79%, 34.00% 25.16%, 35.00% 21.05%, 36.00% 14.75%, 37.00% 8.22%, 38.00% 3.48%, 39.00% 2.02%, 40.00% 4.29%, 41.00% 9.58%, 42.00% 16.25%, 43.00% 22.21%, 44.00% 25.62%, 45.00% 25.41%, 46.00% 21.65%, 47.00% 15.50%, 48.00% 8.89%, 49.00% 3.87%, 50.00% 2.00%, 51.00% 3.87%, 52.00% 8.89%, 53.00% 15.50%, 54.00% 21.65%, 55.00% 25.41%, 56.00% 25.62%, 57.00% 22.21%, 58.00% 16.25%, 59.00% 9.58%, 60.00% 4.29%, 61.00% 2.02%, 62.00% 3.48%, 63.00% 8.22%, 64.00% 14.75%, 65.00% 21.05%, 66.00% 25.16%, 67.00% 25.79%, 68.00% 22.75%, 69.00% 16.98%, 70.00% 10.29%, 71.00% 4.75%, 72.00% 2.09%, 73.00% 3.14%, 74.00% 7.57%, 75.00% 14.00%, 76.00% 20.43%, 77.00% 24.86%, 78.00% 25.91%, 79.00% 23.25%, 80.00% 17.71%, 81.00% 11.02%, 82.00% 5.25%, 83.00% 2.21%, 84.00% 2.84%, 85.00% 6.95%, 86.00% 13.25%, 87.00% 19.78%, 88.00% 24.52%, 89.00% 25.98%, 90.00% 23.71%, 91.00% 18.42%, 92.00% 11.75%, 93.00% 5.79%, 94.00% 2.38%, 95.00% 2.59%, 96.00% 6.35%, 97.00% 12.50%, 98.00% 19.11%, 99.00% 24.13%, 100.00% 26.00%);
+  height: 50px;
+}
+header>div.title {
+  padding: 1em 0;
+}
+
+header div.title h1 {
+  font-weight: 800;
+  font-variant: all-petite-caps;
+  font-size:  3em;
+}
+header div.title p {
+  letter-spacing: 0.5em;
+}
+header div.title i {
+  font-weight: 500;
+  letter-spacing: 0.4em;
+}
+
+article {
+  width: 75%;
+  text-align: center;
+}
+
+section.resul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,auto));
+/*   grid-template-rows:1 ; */
+  border: solid 1em var(--C);
+  border-radius: 1em;
+  margin: 1em 0;
+  overflow-y: scroll;
+}
+
+section.resul div.elem {
+  padding: 1em;
+  margin: 1em 0;
+  opacity: 0.8;
+  border-radius: 1em;
+  transition: .2s ease-out;
+  justify-self: center;
+}
+
+section.resul svg {
+  width: 100%;
+  height: 5em;
+}
+section.resul div.elem:hover {
+  padding: 1em;
+  background-color: var(--D);
+  opacity: 1;
+  border-radius: 2em;
+  transition: .2s ease-in;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+section.resul div.elem.match {
+  grid-column: span 2;
+  opacity: 1;
+  border: solid .4em var(--D);
+}
+section.resul div.elem p {
+  background-color: var(--b);
+  padding: 0.75em;
+  font-variant: all-small-caps;
+  letter-spacing: .3em;
+  border-radius: 1em 0;
+  animation: letter-intro .3s ease-in;
+  overflow: hidden;
+}
+
+@keyframes letter-intro {
+  0% {
+    letter-spacing: -1em;
+    color:#0000;
+  }
+  50% {
+    color:#0000;
+  }
+  to {
+    letter-spacing: .3em;
+    color:#000
+  }
+}
+
+section.form   {
+  display: flex;
+  justify-content: center;
+}
+
+section.form div.inp {
+  display: flex;
+  align-items: center;
+}
+
+section.form input {
+  text-align: center;
+}
+section.form input[search] {
+  border: solid .2em var(--A);
+  border-radius: 1em;
+  padding: .2em;
+  margin: 0 1em;
+  font-size: 1.5em;
+}
+
+section.form input[color] {
+  min-width: 5em;
+  min-height: 5em;
+  width: 5em;
+  height: 5em;
+  max-width: 5em;
+  max-height: 5em;
+  background: #0000;
+  overflow: hidden;
+  border: solid .3em var(--A);
+  border-radius: 15%;
+  appearance: none;
+  background: var(--A);
+}
+ 
