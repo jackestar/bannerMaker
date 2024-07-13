@@ -1,8 +1,15 @@
 template = document.querySelector("[search-result]");
 resultbox = document.querySelector(".resul");
+objform = document.querySelector('div.style div.img')
 resultlist = [];
 word = "";
 tempInputEvent = ''
+style = 0;
+// 0 vertical
+// 1 horizontal 1
+// 2 horizontal 2
+// 3 horizontal 3
+
 
 // clean
 search = document.querySelector("[search]")
@@ -83,9 +90,6 @@ elementFocus = async a => {
     }, 200); // dom loaded
     e = a.parentElement
     e.classList.toggle('selected')
-    // console.log(e)
-    e.querySelector('.copy').innerHTML = list['copy'].svg['regular'].raw + `<i>Copiar el portapapeles</i>`
-    e.querySelector('.down').innerHTML = list['download'].svg['solid'].raw + `<i>Descargar imagen</i>`
     e.querySelector('.penc').innerHTML = list['pencil'].svg.solid.raw
     inp = e.querySelector('input')
     inp.focus()
@@ -114,22 +118,57 @@ function hexToL(hex) {
 
   show = async (e) => {
     try {
+        a = e.parentElement
+        a.querySelector('.copy').innerHTML = list['copy'].svg['regular'].raw + `<i>Copiar el portapapeles</i>`
+        a.querySelector('.down').innerHTML = list['download'].svg['solid'].raw + `<i>Descargar imagen</i>`
         const dataUrl = await htmlToImage.toPng(e);
         e.parentElement.querySelector('a').href = dataUrl;
-        e.parentElement.querySelector('.copy').addEventListener('click', () => copyImageToClipboard(dataUrl), true);
+        e.parentElement.querySelector('.copy').addEventListener('click', () => copyImageToClipboard(dataUrl,a), true);
     } catch (error) {
         console.error('image not downloaded!', error);
     }
 };
 
-copyImageToClipboard = async (base64Image) => {
+copyImageToClipboard = async (base64Image,a) => {
     try {
         const response = await fetch(base64Image);
         const blob = await response.blob();
         const item = new ClipboardItem({ "image/png": blob });
+        // const item = new ClipboardItem({ "image/png": blob });
         await navigator.clipboard.write([item]);
-        alert("Imagen copiada al portapapeles");
+        // console.log(a.querySelector('.copy'))
+        a.querySelector('.copy').classList.add('already')
+        setTimeout(() => {
+            a.querySelector('.copy').classList.remove('already')
+        }, 550);
+        // alert("Imagen copiada al portapapeles");
     } catch (err) {
         console.error("Error copiando la imagen al portapapeles: ", err);
     }
 };
+
+// For default image
+objform.innerHTML = `<img src="./svg/vertical.svg" />`
+objform.addEventListener('click',a => {
+    // console.log(objform.parentElement.querySelector('.tab'))
+    objform.parentElement.querySelector('.tab').classList.add('appear')
+    window.addEventListener('click',outsideEvent,true)
+})
+
+outsideEvent = e => {
+        if (objform.parentElement.contains(e.target)) {
+            if (e.target.classList.contains('v')) {
+                console.log(e.target)
+                resultbox.classList.add('v')
+                resultbox.classList.remove('h2')
+            }
+            else if (e.target.classList.contains('h2')) {
+                console.log(e.target)
+                resultbox.classList.add('h2')
+                resultbox.classList.remove('v')
+                }
+        } else {
+            window.removeEventListener('click',outsideEvent,true)
+        }
+        objform.parentElement.querySelector('.tab').classList.remove('appear')
+    }
