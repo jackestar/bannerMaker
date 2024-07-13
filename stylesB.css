@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Montserrat;
 }
 
 :root {
@@ -14,7 +15,8 @@
   --c:#e395d3;
   --d:#d3b7ee;
   --e:#fbf9ff;
-
+  --text-color:#000;
+  --text-bg:#f2a3bb;
 }
 
 body {
@@ -70,22 +72,85 @@ section.resul {
   border: solid 1em var(--C);
   border-radius: 1em;
   margin: 1em 0;
-  overflow-y: scroll;
-}
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: .5em;
+} 
 
 section.resul div.elem {
   padding: 1em;
-  margin: 1em 0;
   opacity: 0.8;
   border-radius: 1em;
   transition: .2s ease-out;
   justify-self: center;
+  margin: .5em;
+  transition: .2s ease;
+  flex-wrap: wrap;
+  gap: 5em 0;
+}
+section.resul div.elem.match {
+  grid-column: span 2;
+  opacity: 1;
+  border: solid .4em var(--D);
+}
+section.resul div.elem.selected {
+  border: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  opacity: 1;
+  background: none;
+}
+section.resul div.elem.selected:hover {
+  background: none;
+}
+section.resul div.elem.selected div.edit>*{
+  display: flex;
+  text-align: left;
+  align-items: center;
+  margin: 1em;
+}
+
+section.resul div.elem.selected>div.photo {
+/*   width: 100%; */
+/*   align-content: center; */
+  padding: 3em;
+  align-self: center;
+  border: none;
+}
+
+section.resul div.elem.selected>div.photo.complete {
+  border: dotted .5em var(--A);
 }
 
 section.resul svg {
   width: 100%;
   height: 5em;
 }
+
+section.resul.hid div.elem:not(.selected) {
+  display: none;
+}
+
+section.resul div.elem.selected div.edit {
+  display: grid;
+  grid-template-rows: 1fr 1fr minmax(3em,5em);
+}
+section.resul div.elem.selected div.edit .copy,section.resul div.elem.selected div.edit .down {
+  grid-column: span 2;
+}
+section.resul div.elem.selected div.edit input {
+  text-align: center;
+  align-self: center;
+}
+section.resul div.elem.selected div.edit .penc svg {
+  width: 2em;
+}
+
+section.resul div.elem div.edit {
+  display: none
+}
+
 section.resul div.elem:hover {
   padding: 1em;
   background-color: var(--D);
@@ -98,19 +163,16 @@ input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
-section.resul div.elem.match {
-  grid-column: span 2;
-  opacity: 1;
-  border: solid .4em var(--D);
-}
-section.resul div.elem p {
-  background-color: var(--b);
+section.resul div.elem p, section.resul div.edit input {
+  background-color: var(--text-bg);
+  color:var(--text-color);
   padding: 0.75em;
   font-variant: all-small-caps;
   letter-spacing: .3em;
   border-radius: 1em 0;
   animation: letter-intro .3s ease-in;
-  overflow: hidden;
+  border: none;
+  max-width: 25vw;
 }
 
 @keyframes letter-intro {
@@ -161,5 +223,9 @@ section.form input[color] {
   border-radius: 15%;
   appearance: none;
   background: var(--A);
+}
+
+input[color], section.resul div.elem:not(.selected), section.resul div.elem.selected div{
+  cursor: pointer
 }
  
