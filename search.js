@@ -1,6 +1,9 @@
 template = document.querySelector("[search-result]");
 resultbox = document.querySelector(".resul");
 objform = document.querySelector('div.style div.img')
+pencilIcon = ''
+copyIcon = ''
+downloadIcon = ''
 resultlist = [];
 word = "";
 tempInputEvent = ''
@@ -15,62 +18,7 @@ style = 0;
 search = document.querySelector("[search]")
 search.value = ''
 
-search.addEventListener("input", (e) => {
-    if (tempInputEvent) tempInputEvent.removeEventListener('input',changeText,true)
-    newword = e.target.value.replaceAll(" ", "-").toLowerCase();
-    // Reset Selections
-    if (resultbox) for (i=resultbox.childNodes.length;i>0;i--) {
-        if (resultbox.childNodes[i]) {
-            e = resultbox.childNodes[i]
-            e.classList.remove('selected')
-            e.classList.remove('complete')
-            e.parentElement.classList.remove('hid')
-        }
-    }
-
-
-
-    pos = 0;
-    for (obj in list) {
-        if (typeof(resultbox.childNodes[pos]) == "object" && obj == newword) resultbox.childNodes[pos].classList.add('match')
-        else if (resultbox.childNodes[pos]) resultbox.childNodes[pos].classList = 'elem'
-        if (obj.includes(newword)) {
-            if (obj === resultlist[pos]) {
-                pos++;
-                if (pos >= 5) break;
-                continue;
-            } else {
-                card = template.content.cloneNode(true).children[0];
-                card.querySelector("p").textContent = obj.replaceAll("-", " ");
-                svgraw = "";
-                if (list[obj].svg.solid) svgraw = list[obj].svg.solid.raw;
-                else if (list[obj].svg.brands) svgraw = list[obj].svg.brands.raw;
-                else if (list[obj].svg.regular) svgraw = list[obj].svg.regular.raw;
-                card.querySelector(".img").innerHTML = svgraw;
-
-                if (resultbox.childElementCount <= pos) {
-                    resultbox.append(card);
-                    resultlist.push(obj);
-                } else {
-                    resultbox.replaceChild(card, resultbox.childNodes[pos]);
-                    resultlist[pos] = obj;
-                }
-                pos++;
-            }
-            // console.log(obj,newword,resultbox.childNodes[pos-1])
-            
-            if (pos >= 5) break;
-        }
-
-    }
-    if (pos==1) resultbox.childNodes[0].classList.add('match')
-    resultlist = resultlist.slice(0, pos);
-    while (resultbox.childElementCount > pos) {
-        resultbox.removeChild(resultbox.lastChild);
-    }
-});
-
-document.querySelector('[color]').addEventListener('change',e => {
+document.querySelector('[color]').addEventListener('input',e => {
     document.querySelector(':root').style.setProperty('--text-bg',e.target.value)
     console.log(hexToL(e.target.value)>.5?'#000':'#fff')
     document.querySelector(':root').style.setProperty('--text-color',hexToL(e.target.value)>.5?'#000':'#fff')
@@ -78,19 +26,13 @@ document.querySelector('[color]').addEventListener('change',e => {
 
 list = 0;
 
-fetch("icons.json")
-    .then((resp) => resp.json())
-    .then((data) => {
-        list = data;
-    });
-
 elementFocus = async a => {
     setTimeout(() => {
         show(a)
     }, 200); // dom loaded
     e = a.parentElement
     e.classList.toggle('selected')
-    e.querySelector('.penc').innerHTML = list['pencil'].svg.solid.raw
+    e.querySelector('.penc').innerHTML = pencilIcon
     inp = e.querySelector('input')
     inp.focus()
     inp.placeholder = e.querySelector('p').innerText
@@ -110,17 +52,14 @@ function hexToL(hex) {
       b = parseInt(result[3], 16);
       r /= 255, g /= 255, b /= 255;
       (0.299*r + 0.587*g + 0.114*b)
-      // var max = Math.max(r, g, b), min = Math.min(r, g, b);
-      // var h, s, l = (max + min) / 2;
     return (0.299*r + 0.587*g + 0.114*b)
   }
 
-
-  show = async (e) => {
+show = async (e) => {
     try {
         a = e.parentElement
-        a.querySelector('.copy').innerHTML = list['copy'].svg['regular'].raw + `<i>Copiar el portapapeles</i>`
-        a.querySelector('.down').innerHTML = list['download'].svg['solid'].raw + `<i>Descargar imagen</i>`
+        a.querySelector('.copy').innerHTML = copyIcon + `<i>Copiar el portapapeles</i>`
+        a.querySelector('.down').innerHTML = downloadIcon + `<i>Descargar imagen</i>`
         const dataUrl = await htmlToImage.toPng(e);
         e.parentElement.querySelector('a').href = dataUrl;
         e.parentElement.querySelector('.copy').addEventListener('click', () => copyImageToClipboard(dataUrl,a), true);

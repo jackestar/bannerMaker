@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Little Banner Generator</title>
+    <link rel="stylesheet" href="stylesB.css">
+    <link rel="stylesheet" href="webfonts/Montserrat.css">
+    <script src="html-to-image.js"></script>
+</head>
+<body>
+    <header>
+        <div class="title">
+            <h1>Generador De Icon Banner</h1>
+            <p>v1.1 generated with <i>Icomoon</i></p>
+        </div>
+        <div class="path"></div>
+    </header>
+    <article>
+        <section class="form">
+            <div class="inp">
+                <input type="search" placeholder="Icono a buscar" name="icon" search>
+                <input type="color" name="color" color value="#f2a3bb">
+                <div class="style">
+                    <div class="img"></div>
+                    <div class="tab">
+                        <div class="blank"></div>
+                        <div class="cont">
+                            <img src="./svg/horizontal1.svg" class="h1">
+                            <img src="./svg/horizontal2.svg" class="h2">
+                            <img src="./svg/horizontal3.svg" class="h3">
+                            <img src="./svg/vertical.svg" class="v">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="resul v">
+
+        </section>
+        <template search-result>
+            <div class="elem">
+                <div class="photo" onclick="elementFocus(this)">
+                    <div class="img"></div>
+                    <p></p>
+                </div>
+                <div class="edit">
+                    <div class="copy"></div>
+                    <a download="banner.png" class="down"></a>
+                    <div class="penc"></div>
+                    <input type="text" placeholder="Holooe">
+                </div>
+            </div>
+        </template>
+    </article>
+    <script src="search.js"></script>
+    <script src="im.js"></script>
+</body>
+</html>
