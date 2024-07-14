@@ -41,7 +41,7 @@ search.addEventListener("input", (e) => {
                 continue;
             } else {
                 card = template.content.cloneNode(true).children[0];
-                card.querySelector("p").textContent = obj;
+                card.querySelector("p").textContent = obj.replaceAll("-", " ");
                 svgraw = "";
                 if (list[obj].svg.solid) svgraw = list[obj].svg.solid.raw;
                 else if (list[obj].svg.brands) svgraw = list[obj].svg.brands.raw;
@@ -161,11 +161,13 @@ outsideEvent = e => {
                 console.log(e.target)
                 resultbox.classList.add('v')
                 resultbox.classList.remove('h2')
+                objform.innerHTML = `<img src="./svg/vertical.svg" />`
             }
             else if (e.target.classList.contains('h2')) {
                 console.log(e.target)
                 resultbox.classList.add('h2')
                 resultbox.classList.remove('v')
+                objform.innerHTML = `<img src="./svg/horizontal2.svg" />`
                 }
         } else {
             window.removeEventListener('click',outsideEvent,true)
