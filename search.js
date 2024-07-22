@@ -20,7 +20,6 @@ search.value = ''
 
 document.querySelector('[color]').addEventListener('input',e => {
     document.querySelector(':root').style.setProperty('--text-bg',e.target.value)
-    console.log(hexToL(e.target.value)>.5?'#000':'#fff')
     document.querySelector(':root').style.setProperty('--text-color',hexToL(e.target.value)>.5?'#000':'#fff')
 })
 
@@ -45,6 +44,7 @@ changeText = a => {
     tempInputEvent.parentElement.parentElement.querySelector('p').innerText = tempInputEvent.value
 }
 
+// Hex Color to Luminance Value
 function hexToL(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
       r = parseInt(result[1], 16);
@@ -73,9 +73,7 @@ copyImageToClipboard = async (base64Image,a) => {
         const response = await fetch(base64Image);
         const blob = await response.blob();
         const item = new ClipboardItem({ "image/png": blob });
-        // const item = new ClipboardItem({ "image/png": blob });
         await navigator.clipboard.write([item]);
-        // console.log(a.querySelector('.copy'))
         a.querySelector('.copy').classList.add('already')
         setTimeout(() => {
             a.querySelector('.copy').classList.remove('already')
@@ -89,7 +87,6 @@ copyImageToClipboard = async (base64Image,a) => {
 // For default image
 objform.innerHTML = `<img src="./svg/vertical.svg" />`
 objform.addEventListener('click',a => {
-    // console.log(objform.parentElement.querySelector('.tab'))
     objform.parentElement.querySelector('.tab').classList.add('appear')
     window.addEventListener('click',outsideEvent,true)
 })
@@ -97,13 +94,11 @@ objform.addEventListener('click',a => {
 outsideEvent = e => {
         if (objform.parentElement.contains(e.target)) {
             if (e.target.classList.contains('v')) {
-                console.log(e.target)
                 resultbox.classList.add('v')
                 resultbox.classList.remove('h2')
                 objform.innerHTML = `<img src="./svg/vertical.svg" />`
             }
             else if (e.target.classList.contains('h2')) {
-                console.log(e.target)
                 resultbox.classList.add('h2')
                 resultbox.classList.remove('v')
                 objform.innerHTML = `<img src="./svg/horizontal2.svg" />`

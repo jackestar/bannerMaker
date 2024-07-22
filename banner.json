@@ -1,0 +1,10 @@
+{
+    "name":"Banner Icon Maker - Customize and create banner from an icon pack",
+    "lang": "en",
+    "short_name":"Banner Icon Maker",
+    "background_color": "#fbf9ff",
+    "display":"standalone",
+    "theme_color": "#9395d3",
+    "start_url":"./banner_icomoon.html",
+    "description":"Customize and create banner from selected icon pack and Customize styles and color to create a images"
+}

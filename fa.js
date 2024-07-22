@@ -40,8 +40,6 @@ search.addEventListener("input", (e) => {
                 }
                 pos++;
             }
-            // console.log(obj,newword,resultbox.childNodes[pos-1])
-            
             if (pos >= 5) break;
         }
 

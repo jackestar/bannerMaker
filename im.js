@@ -49,8 +49,6 @@ svgraw += `</svg>`
                 }
                 pos++;
             }
-            // console.log(obj,newword,resultbox.childNodes[pos-1])
-            
             if (pos >= 8) break;
         }
 
